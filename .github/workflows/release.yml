@@ -34,7 +34,7 @@ jobs:
             const { owner, repo } = context.repo
 
             const release = 0
-            const commit = First commit
+            const commit = "First commit"
 
             const tag = `MICROFRONT.${year}.${week}.${release}`
 
