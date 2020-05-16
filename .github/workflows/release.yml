@@ -38,7 +38,7 @@ jobs:
               repo: 'pandatag',
             })
 
-            const [_, _, lastReleaseWeek, lastReleaseNumber] = latestRelease.data.tag_name.split('.')
+            const [n, y, lastReleaseWeek, lastReleaseNumber] = latestRelease.data.tag_name.split('.')
 
             let release = 0
 
