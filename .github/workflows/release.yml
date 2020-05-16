@@ -33,7 +33,7 @@ jobs:
 
             const { owner, repo } = context.repo
 
-            const latestRelease = await octokit.repos.getLatestRelease({
+            const latestRelease = await github.repos.getLatestRelease({
               owner: 'pheeria',
               repo: 'pandatag',
             })
@@ -47,7 +47,7 @@ jobs:
               release = parsedNumber + 1
             }
 
-            const latestCommit = await octokit.repos.listCommits({
+            const latestCommit = await github.repos.listCommits({
               owner: 'pheeria',
               repo: 'pandatag',
               per_page: 1,
