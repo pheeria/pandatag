@@ -1,6 +1,8 @@
 name: 'Pandatag'
 
-on: [push]
+on:
+  push:
+    branches: [master]
 
 jobs:
   release:
@@ -34,8 +36,8 @@ jobs:
             const { owner, repo } = context.repo
 
             const latestRelease = await github.repos.getLatestRelease({
-              owner: 'pheeria',
-              repo: 'pandatag',
+              owner,
+              repo,
             })
 
             const [n, y, lastReleaseWeek, lastReleaseNumber] = latestRelease.data.tag_name.split('.')
@@ -48,8 +50,8 @@ jobs:
             }
 
             const latestCommit = await github.repos.listCommits({
-              owner: 'pheeria',
-              repo: 'pandatag',
+              owner,
+              repo,
               per_page: 1,
             })
 
@@ -62,12 +64,9 @@ jobs:
             // Create a release
             // API Documentation: https://developer.github.com/v3/repos/releases/#create-a-release
             // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-create-release
-            const createReleaseResponse = await github.repos.createRelease({
+            await github.repos.createRelease({
               owner,
               repo,
               tag_name: tag,
-              name: releaseName,
-              body: '',
-              draft: false,
-              prerelease: false
+              name: releaseName
             });
