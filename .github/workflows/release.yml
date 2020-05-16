@@ -33,8 +33,27 @@ jobs:
 
             const { owner, repo } = context.repo
 
-            const release = 0
-            const commit = "First commit"
+            const latestRelease = await octokit.repos.getLatestRelease({
+              owner: 'pheeria',
+              repo: 'pandatag',
+            })
+
+            const [_, _, lastReleaseWeek, lastReleaseNumber] = latestRelease.data.tag_name.split('.')
+
+            let release = 0
+
+            if (lastReleaseWeek == week) {
+              const parsedNumber = parseInt(lastReleaseNumber, 10)
+              release = parsedNumber + 1
+            }
+
+            const latestCommit = await octokit.repos.listCommits({
+              owner: 'pheeria',
+              repo: 'pandatag',
+              per_page: 1,
+            })
+
+            const commit = latestCommit.data[0].commit.message.split('\n')[0].slice(0, -7)
 
             const tag = `MICROFRONT.${year}.${week}.${release}`
 
