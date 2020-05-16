@@ -1,6 +1,4 @@
 name: 'Pandatag'
-description: 'Automatically release every commit on master'
-author: 'pheeria'
 
 branding:
   icon: 'tag'
