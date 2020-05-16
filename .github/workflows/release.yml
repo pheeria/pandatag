@@ -1,9 +1,5 @@
 name: 'Pandatag'
 
-branding:
-  icon: 'tag'
-  color: 'pink'
-
 on: [push]
 
 jobs:
