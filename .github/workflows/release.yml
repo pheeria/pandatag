@@ -18,16 +18,12 @@ jobs:
               let d = new Date(
                 Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
               )
-              // Set to nearest Thursday: current date + 4 - current day number
-              // Make Sunday's day number 7
               d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7))
-              // Get first day of year
-              let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1))
-              // Calculate full weeks to nearest Thursday
-              let week = Math.ceil(((d - yearStart) / 86400000 + 1) / 7).toString()
 
+              let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1))
+              let week = Math.ceil(((d - yearStart) / 86400000 + 1) / 7).toString()
               let year = d.getUTCFullYear().toString().slice(-2)
-              // Return array of year and week number
+
               return [year, week]
             }
 
@@ -39,11 +35,9 @@ jobs:
               owner,
               repo,
             })
-
             const [n, y, lastReleaseWeek, lastReleaseNumber] = latestRelease.data.tag_name.split('.')
 
             let release = 0
-
             if (lastReleaseWeek == week) {
               const parsedNumber = parseInt(lastReleaseNumber, 10)
               release = parsedNumber + 1
@@ -54,16 +48,12 @@ jobs:
               repo,
               per_page: 1,
             })
-
             const commit = latestCommit.data[0].commit.message.split('\n')[0].slice(0, -7)
 
-            const tag = `MICROFRONT.${year}.${week}.${release}`
 
+            const tag = `MICROFRONT.${year}.${week}.${release}`
             const releaseName = `${tag} | ${commit}`
 
-            // Create a release
-            // API Documentation: https://developer.github.com/v3/repos/releases/#create-a-release
-            // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-create-release
             await github.repos.createRelease({
               owner,
               repo,
