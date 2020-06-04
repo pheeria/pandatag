@@ -28,7 +28,6 @@ jobs:
             }
 
             const [year, week] = getYearAndWeek()
-
             const { owner, repo } = context.repo
 
             const latestRelease = await github.repos.getLatestRelease({
@@ -49,7 +48,6 @@ jobs:
               per_page: 1,
             })
             const commit = latestCommit.data[0].commit.message.split('\n')[0].slice(0, -7)
-
 
             const tag = `MICROFRONT.${year}.${week}.${release}`
             const releaseName = `${tag} | ${commit}`
