@@ -12,8 +12,8 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            // https://stackoverflow.com/a/6117889
             function getYearAndWeek() {
+              // https://stackoverflow.com/a/6117889
               let date = new Date()
               let d = new Date(
                 Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
