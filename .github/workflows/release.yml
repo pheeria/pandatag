@@ -12,8 +12,8 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            // https://stackoverflow.com/a/6117889
             function getYearAndWeek() {
+            // https://stackoverflow.com/a/6117889
               let date = new Date()
               let d = new Date(
                 Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
@@ -28,13 +28,14 @@ jobs:
             }
 
             const [year, week] = getYearAndWeek()
+
             const { owner, repo } = context.repo
 
             const latestRelease = await github.repos.getLatestRelease({
               owner,
               repo,
             })
-            const [n, y, lastReleaseWeek, lastReleaseNumber] = latestRelease.data.tag_name.split('.')
+            const [tagcode, y, lastReleaseWeek, lastReleaseNumber] = latestRelease.data.tag_name.split('.')
 
             let release = 0
             if (lastReleaseWeek == week) {
@@ -49,7 +50,7 @@ jobs:
             })
             const commit = latestCommit.data[0].commit.message.split('\n')[0].slice(0, -7)
 
-            const tag = `MICROFRONT.${year}.${week}.${release}`
+            const tag = `${tagcode}.${year}.${week}.${release}`
             const releaseName = `${tag} | ${commit}`
 
             await github.repos.createRelease({
