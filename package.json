@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/pheeria/pandatag/issues"
   },
-  "homepage": "https://github.com/pheeria/pandatag#readme"
+  "homepage": "https://github.com/pheeria/pandatag#readme",
+  "dependencies": {
+    "@octokit/rest": "^17.9.0"
+  }
 }
