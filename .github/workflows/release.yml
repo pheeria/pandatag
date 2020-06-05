@@ -28,7 +28,6 @@ jobs:
             }
 
             const [year, week] = getYearAndWeek()
-
             const { owner, repo } = context.repo
 
             const latestRelease = await github.repos.getLatestRelease({
