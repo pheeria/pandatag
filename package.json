@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/pheeria/pandatag#readme",
   "dependencies": {
-    "@octokit/rest": "^17.9.0"
+    "@octokit/rest": "^19.0.13"
   }
 }
